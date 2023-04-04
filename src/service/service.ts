@@ -7,15 +7,16 @@ const headers = {
   'Content-Type': 'application/json',
 };
 
-function handleSuccess (res: ServerResponse, data) {
+function handleSuccess (res: ServerResponse, data: any) {
   res.writeHead(200, headers);
   res.write(JSON.stringify({
     status: 'success',
     data,
-  }))
+  }));
+  res.end();
 };
 
-function handleErr(res, err?: Error | unknown) {
+function handleErr(res: ServerResponse, err?: Error | unknown) {
   res.writeHead(400, headers);
   let message: string  = ''; 
   if (err instanceof Error) {
@@ -26,7 +27,8 @@ function handleErr(res, err?: Error | unknown) {
   res.write(JSON.stringify({
     status: 'false',
     message,
-  }))
+  }));
+  res.end();
 };
 
 export { headers, handleSuccess, handleErr };
