@@ -1,9 +1,9 @@
 import http from 'http';
 import './connections';
+import routes from './routes';
 
 const app =  async (req: http.IncomingMessage, res: http.ServerResponse) => {
-  const { method, url} = req;
-  console.log(method, url);
+  routes(req, res);
 };
 
 export default app;

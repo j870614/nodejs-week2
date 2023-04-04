@@ -8,10 +8,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 require("./connections");
+const routes_1 = __importDefault(require("./routes"));
 const app = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { method, url } = req;
-    console.log(method, url);
+    (0, routes_1.default)(req, res);
 });
 exports.default = app;
