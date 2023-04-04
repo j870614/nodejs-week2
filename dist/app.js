@@ -9,9 +9,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.app = void 0;
+require("./connections");
 const app = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { method, url } = req;
     console.log(method, url);
 });
-exports.app = app;
+exports.default = app;
