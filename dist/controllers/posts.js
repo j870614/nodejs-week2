@@ -17,9 +17,8 @@ const handleSuccess_1 = __importDefault(require("../service/handleSuccess"));
 const posts_1 = require("../model/posts");
 ;
 const posts = {
-    getPosts(httpObj) {
+    getPosts({ res }) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { res } = httpObj;
             const allPosts = yield posts_1.Posts.find();
             (0, handleSuccess_1.default)(res, allPosts);
             res.end();

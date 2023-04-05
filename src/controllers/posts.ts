@@ -10,8 +10,7 @@ interface IHttpObj {
 };
 
 const posts = {
-  async getPosts (httpObj: IHttpObj): Promise<void> {
-    const { res } = httpObj;
+  async getPosts ( { res }: IHttpObj): Promise<void> {
     const allPosts: IPost[] = await Posts.find();
     handleSuccess( res, allPosts);
     res.end();
