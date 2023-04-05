@@ -12,20 +12,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const http_1 = __importDefault(require("../controllers/http"));
-const posts_1 = __importDefault(require("../controllers/posts"));
-const routes = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { method, url } = req;
-    console.log(method, url);
-    let body = '';
-    req.on('data', (chunk) => {
-        body += chunk;
-    });
-    if (url === '/posts' && method === 'GET') {
-        posts_1.default.getPosts({ req, res });
-    }
-    else {
-        http_1.default.notFound(req, res);
-    }
-});
-exports.default = routes;
+const handleSuccess_1 = __importDefault(require("../service/handleSuccess"));
+// import handleErr from "../service/handleError";
+const posts_1 = require("../model/posts");
+;
+const posts = {
+    getPosts(httpObj) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { res } = httpObj;
+            const allPosts = yield posts_1.Posts.find();
+            (0, handleSuccess_1.default)(res, allPosts);
+            res.end();
+        });
+    },
+};
+exports.default = posts;

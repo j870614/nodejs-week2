@@ -1,5 +1,6 @@
 import { IncomingMessage, ServerResponse} from 'http';
 import HttpControllers from '../controllers/http';
+import PostsControllers from '../controllers/posts';
 
 const routes = async (req: IncomingMessage, res: ServerResponse) => {
   const { method, url} = req;
@@ -11,7 +12,7 @@ const routes = async (req: IncomingMessage, res: ServerResponse) => {
   });
 
   if (url === '/posts' && method === 'GET') {
-    console.log("get test");
+    PostsControllers.getPosts({req, res});
   } else {
     HttpControllers.notFound(req, res);
   }
