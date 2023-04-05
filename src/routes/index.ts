@@ -1,4 +1,6 @@
 import { IncomingMessage, ServerResponse} from 'http';
+import { Posts }  from '../model/posts'
+
 const routes = async (req: IncomingMessage, res: ServerResponse) => {
   const { method, url} = req;
   console.log(method, url);
