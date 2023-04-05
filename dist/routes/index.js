@@ -8,11 +8,23 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
+const http_1 = __importDefault(require("../controllers/http"));
 const routes = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { method, url } = req;
     console.log(method, url);
-    const allPosts = yield Posts.find();
-    console.log(allPosts);
+    let body = '';
+    req.on('data', (chunk) => {
+        body += chunk;
+    });
+    if (url === '/posts' && method === 'GET') {
+        console.log("get test");
+    }
+    else {
+        http_1.default.notFound(req, res);
+    }
 });
 exports.default = routes;
