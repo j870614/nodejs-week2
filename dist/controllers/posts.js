@@ -13,7 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const handleSuccess_1 = __importDefault(require("../service/handleSuccess"));
-// import handleErr from "../service/handleError";
+const handleError_1 = __importDefault(require("../service/handleError"));
 const posts_1 = require("../model/posts");
 ;
 const posts = {
@@ -24,5 +24,31 @@ const posts = {
             res.end();
         });
     },
+    createPosts({ req, res, body }) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                if (!body) {
+                    (0, handleError_1.default)(res);
+                    return;
+                }
+                const data = JSON.parse(body);
+                if (data.content) {
+                    const newPost = yield posts_1.Posts.create({
+                        name: data.name,
+                        content: data.content,
+                        tags: data.tags,
+                        type: data.type,
+                    });
+                    (0, handleSuccess_1.default)(res, newPost);
+                }
+                else {
+                    (0, handleError_1.default)(res);
+                }
+            }
+            catch (err) {
+                (0, handleError_1.default)(res, err);
+            }
+        });
+    }
 };
 exports.default = posts;

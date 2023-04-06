@@ -24,6 +24,12 @@ const routes = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     if (url === '/posts' && method === 'GET') {
         posts_1.default.getPosts({ req, res });
     }
+    else if (url === '/posts' && method === 'POST') {
+        req.on('end', () => posts_1.default.createPosts({ req, res, body }));
+    }
+    else if (method === 'OPTIONS') {
+        http_1.default.cors(req, res);
+    }
     else {
         http_1.default.notFound(req, res);
     }
