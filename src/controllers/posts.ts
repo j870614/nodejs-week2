@@ -56,6 +56,21 @@ const posts = {
     } catch (error) {
       handleErr(res, error);
     }
+  },
+  async updatePost ( { req, res, body }: IHttpObj ): Promise<void> {
+    const { url } = req;
+    const id = url?.split('/').pop();
+    try {
+      if (!body) {
+        return handleErr(res);
+      }
+      const updateData = <IPost>JSON.parse(body);
+      const post = await Posts.findByIdAndUpdate(id, updateData, { new: true } ); 
+      // { new: true } 的設定表示回傳的物件為更新過的內容。 預設值為 false 表示回傳的物件為更新前的內容
+      if ( post ) return handleSuccess<IPost>(res, post);
+    } catch (error) {
+      handleErr(res);
+    }
   }
 };
 

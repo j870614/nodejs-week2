@@ -19,6 +19,8 @@ const routes = async (req: IncomingMessage, res: ServerResponse) => {
     PostsControllers.deleteAllPosts({req, res});
   } else if ( url?.startsWith('/posts/') && method === 'DELETE' ) {
     PostsControllers.deletePost({req, res});
+  } else if ( url?.startsWith('/posts/') && method === 'PATCH' ) {
+    req.on ('end', () => PostsControllers.updatePost({req, res, body}));
   } else if ( method === 'OPTIONS' ) {
     HttpControllers.cors(req,res);
   } else {

@@ -74,6 +74,25 @@ const posts = {
                 (0, handleError_1.default)(res, error);
             }
         });
+    },
+    updatePost({ req, res, body }) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { url } = req;
+            const id = url === null || url === void 0 ? void 0 : url.split('/').pop();
+            try {
+                if (!body) {
+                    return (0, handleError_1.default)(res);
+                }
+                const updateData = JSON.parse(body);
+                const post = yield posts_1.Posts.findByIdAndUpdate(id, updateData, { new: true });
+                // { new: true } 的設定表示回傳的物件為更新過的內容。 預設值為 false 表示回傳的物件為更新前的內容
+                if (post)
+                    return (0, handleSuccess_1.default)(res, post);
+            }
+            catch (error) {
+                (0, handleError_1.default)(res);
+            }
+        });
     }
 };
 exports.default = posts;

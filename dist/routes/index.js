@@ -33,6 +33,9 @@ const routes = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     else if ((url === null || url === void 0 ? void 0 : url.startsWith('/posts/')) && method === 'DELETE') {
         posts_1.default.deletePost({ req, res });
     }
+    else if ((url === null || url === void 0 ? void 0 : url.startsWith('/posts/')) && method === 'PATCH') {
+        req.on('end', () => posts_1.default.updatePost({ req, res, body }));
+    }
     else if (method === 'OPTIONS') {
         http_1.default.cors(req, res);
     }
