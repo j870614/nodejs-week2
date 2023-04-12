@@ -13,8 +13,12 @@ const routes = async (req: IncomingMessage, res: ServerResponse) => {
 
   if (url === '/posts' && method === 'GET') {
     PostsControllers.getPosts({req, res});
-  } else if ( url === '/posts' &&method === 'POST' ) {
+  } else if ( url === '/posts' && method === 'POST' ) {
     req.on('end', () => PostsControllers.createPosts({req, res, body}));
+  } else if ( url === '/posts' && method === 'DELETE' ) {
+    PostsControllers.deleteAllPosts({req, res});
+  } else if ( url?.startsWith('/posts/') && method === 'DELETE' ) {
+    PostsControllers.deletePost({req, res});
   } else if ( method === 'OPTIONS' ) {
     HttpControllers.cors(req,res);
   } else {

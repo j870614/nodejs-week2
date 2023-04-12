@@ -24,7 +24,7 @@ const posts = {
             res.end();
         });
     },
-    createPosts({ req, res, body }) {
+    createPosts({ res, body }) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 if (!body) {
@@ -47,6 +47,31 @@ const posts = {
             }
             catch (err) {
                 (0, handleError_1.default)(res, err);
+            }
+        });
+    },
+    deletePost({ req, res }) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { url } = req;
+            const id = url === null || url === void 0 ? void 0 : url.split('/').pop();
+            try {
+                const post = yield posts_1.Posts.findByIdAndDelete(id);
+                if (post)
+                    return (0, handleSuccess_1.default)(res, post);
+            }
+            catch (error) {
+                (0, handleError_1.default)(res);
+            }
+        });
+    },
+    deleteAllPosts({ res }) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                yield posts_1.Posts.deleteMany();
+                (0, handleSuccess_1.default)(res, null);
+            }
+            catch (error) {
+                (0, handleError_1.default)(res, error);
             }
         });
     }

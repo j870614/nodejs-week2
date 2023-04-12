@@ -27,6 +27,12 @@ const routes = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     else if (url === '/posts' && method === 'POST') {
         req.on('end', () => posts_1.default.createPosts({ req, res, body }));
     }
+    else if (url === '/posts' && method === 'DELETE') {
+        posts_1.default.deleteAllPosts({ req, res });
+    }
+    else if ((url === null || url === void 0 ? void 0 : url.startsWith('/posts/')) && method === 'DELETE') {
+        posts_1.default.deletePost({ req, res });
+    }
     else if (method === 'OPTIONS') {
         http_1.default.cors(req, res);
     }

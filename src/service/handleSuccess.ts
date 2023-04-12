@@ -1,8 +1,7 @@
 import { ServerResponse } from 'http';
 import headers from './headers';
-import { IPost } from '../model/posts';
 
-function handleSuccess (res: ServerResponse, data: IPost[] | IPost) {
+function handleSuccess<T> (res: ServerResponse, data: T) {
   res.writeHead(200, headers);
   res.write(JSON.stringify({
     status: 'success',
