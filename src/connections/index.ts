@@ -1,13 +1,22 @@
 import mongoose from 'mongoose';
+import * as dotenv from 'dotenv'
+dotenv.config()
 
-const DB: string = 'mongodb://127.0.0.1:27017/post'
+const DB = process.env.DATABASE!.replace(
+  '<password>',
+  process.env.DATABASE_PASSWORD!
+);
+console.log(DB);
+// const DB: string = 'mongodb://127.0.0.1:27017/post' //本地資料庫
 
-console.log('資料庫連線中...');
-mongoose.connect(DB)
-  .then(() => {
+const connectToDatabase = async () => {
+  try {
+    console.log('資料庫連線中...');
+    await mongoose.connect(DB);
     console.log('資料庫連線成功');
-  })
-  .catch((err) => {
+  } catch (error) {
     console.log('資料庫連線失敗');
-    console.log(err.reason);
-  })
+  }
+};
+
+connectToDatabase();
