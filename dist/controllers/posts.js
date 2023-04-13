@@ -15,7 +15,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const handleSuccess_1 = __importDefault(require("../service/handleSuccess"));
 const handleError_1 = __importDefault(require("../service/handleError"));
 const posts_1 = require("../model/posts");
-;
 const posts = {
     getPosts({ res }) {
         return __awaiter(this, void 0, void 0, function* () {

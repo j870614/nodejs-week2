@@ -1,13 +1,7 @@
-import { IncomingMessage, ServerResponse } from 'http';
 import handleSuccess from "../service/handleSuccess";
 import handleErr from "../service/handleError";
 import { IPost, Posts } from "../model/posts";
-
-interface IHttpObj {
-  req: IncomingMessage;
-  res: ServerResponse;
-  body?: string;
-};
+import IHttpObj from "../model/interfaces/IHttpObj";
     
 const posts = {
   async getPosts ( { res }: IHttpObj): Promise<void> {

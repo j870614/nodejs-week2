@@ -39,7 +39,6 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const dotenv = __importStar(require("dotenv"));
 dotenv.config();
 const DB = process.env.DATABASE.replace('<password>', process.env.DATABASE_PASSWORD);
-console.log(DB);
 // const DB: string = 'mongodb://127.0.0.1:27017/post' //本地資料庫
 const connectToDatabase = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
